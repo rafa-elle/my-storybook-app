@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
+import { within } from '@storybook/test';
+import { userEvent } from '@storybook/testing-library';
 
 const meta: Meta<typeof Button> = {
     component: Button,
@@ -26,3 +28,16 @@ export const DisableClickSim: Story = {
     },
 };
 
+export const WithInteraction: Story = {
+    args: {
+        label: 'Click Me',
+        autoDisable: true,
+        onClick: async () => { },
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        const button = canvas.getByRole('button', { name: /click me/i });
+
+        await userEvent.click(button);
+    },
+};
