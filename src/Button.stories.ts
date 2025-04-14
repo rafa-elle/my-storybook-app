@@ -16,3 +16,13 @@ export const Primary: Story = {
         onClick: () => alert('Button clicked!'),
     },
 };
+export const DisableClickSim: Story = {
+    args: {
+        label: 'Simula Click',
+        onClick: async () => {
+            await new Promise((resolve) => setTimeout(resolve, 0));
+        },
+        autoDisable: true,
+    },
+};
+
